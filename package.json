@@ -1,7 +1,7 @@
 {
   "name": "hive-mcp-insurance",
-  "version": "1.0.1",
-  "description": "MCP server for the Hive parametric insurance platform. Agents quote and bind parametric insurance policies, check on-chain trigger conditions via oracle event hashes, and track claim status. Premiums ",
+  "version": "1.0.2",
+  "description": "MCP server for HiveInsurance \u2014 parametric insurance for autonomous agents. Uptime SLA, treasury slippage, and oracle-failure coverage. Broker layer operational; underwriter layer in development. USDC settlement on Base L2. Scaffold shim \u2014 backend pending Q3 2026.",
   "type": "module",
   "main": "server.js",
   "bin": {
@@ -29,8 +29,11 @@
     "usdc",
     "base",
     "base-l2",
-    "agent-economy",
-    "a2a"
+    "a2a",
+    "autonomous-agent",
+    "agent-infrastructure",
+    "real-rails",
+    "on-chain-settlement"
   ],
   "author": "Steve Rotzin <steve@thehiveryiq.com> (https://www.thehiveryiq.com)",
   "license": "MIT",
