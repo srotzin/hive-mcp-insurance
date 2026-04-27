@@ -1,0 +1,110 @@
+        # Smithery Registry — HiveInsurance MCP Server
+        # https://smithery.ai
+        # Backend status: v0.1 — pending hivemorph backend build (Q3 2026 spec)
+
+        startCommand:
+          type: http
+          configSchema:
+            type: object
+            properties: {}
+            required: []
+          url: https://hivemorph.onrender.com/mcp/hive-mcp-insurance
+
+        name: hive-mcp-insurance
+        displayName: HiveInsurance — Agent-native parametric insurance with smart-contract triggers and USDC settlement
+        version: "1.0.0"
+        description: >
+          MCP server for the Hive parametric insurance platform. Agents quote and bind parametric insurance policies, check on-chain trigger conditions via oracle event hashes, and track claim status. Premiums and payouts settle in USDC on Base, Ethereum, or Solana via smart-contract automation. Backend build is Q3 2026. Tool calls currently return HTTP 503 with a feature-gating response — no mock data is ever returned. Submit interest via hive-mcp-connector.
+
+        author:
+          name: Steve Rotzin
+          email: steve@thehiveryiq.com
+          url: https://www.thehiveryiq.com
+
+        license: MIT
+        homepage: https://github.com/srotzin/hive-mcp-insurance
+        repository:
+          type: git
+          url: https://github.com/srotzin/hive-mcp-insurance
+
+        transport: streamable-http
+        endpoint: https://hivemorph.onrender.com/mcp
+        protocol: "2024-11-05"
+
+        categories:
+          - insurance
+  - finance
+  - agent-to-agent
+  - web3
+  - defi
+  - parametric
+
+        tags:
+          - mcp
+  - hive
+  - insurance
+  - parametric
+  - usdc
+  - base-l2
+  - a2a
+  - smart-contract
+  - oracle
+  - ai-agents
+
+        tools:
+                - name: quote_policy
+          description: >
+            Quote a parametric insurance policy. Returns a premium estimate for the given risk type, coverage amount (USD), and term length. Backend pending (Q3 2026).
+          inputs:
+            - name: risk_type
+  type: string
+  required: true
+  description: "Risk category (e.g. flight_delay, crop_yield, protocol_hack, weather)"
+- name: coverage_usd
+  type: number
+  required: true
+  description: "Coverage amount in USD"
+- name: term_days
+  type: number
+  required: true
+  description: "Policy term in days"
+        - name: bind_policy
+          description: >
+            Bind a previously quoted policy. Settlement via x402 / USDC on Base, Ethereum, or Solana. Returns policy_id on success. Backend pending (Q3 2026).
+          inputs:
+            - name: quote_id
+  type: string
+  required: true
+  description: "Quote ID from quote_policy"
+- name: payer_did
+  type: string
+  required: true
+  description: "DID of the agent or entity paying the premium"
+      - name: claim_status
+        description: >
+          Check the status of a parametric insurance claim associated with a policy. Returns current state: pending / triggered / paid / disputed. Backend pending (Q3 2026).
+        inputs:
+          - name: policy_id
+type: string
+required: true
+description: "Policy ID from bind_policy"
+      - name: parametric_trigger_check
+        description: >
+          Check whether a parametric oracle event hash satisfies the trigger condition for automatic claim payout. Returns boolean. Backend pending (Q3 2026).
+        inputs:
+          - name: oracle_event_hash
+type: string
+required: true
+description: "SHA-256 hash of the oracle event to evaluate against trigger conditions"
+
+        runtime:
+          type: node
+          version: ">=18"
+          command: node server.js
+          env:
+            - name: PORT
+              default: "3000"
+              required: false
+            - name: HIVE_BASE
+              default: "https://hivemorph.onrender.com"
+              required: false
