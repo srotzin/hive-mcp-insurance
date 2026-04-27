@@ -78,7 +78,7 @@ const SERVICE_CFG = {
   tagline: "Parametric insurance for agent uptime, treasury slippage, and oracle failure.",
   description: "MCP server for HiveInsurance \u2014 parametric insurance for autonomous agents on the Hive Civilization. Uptime SLA, treasury slippage, and oracle-failure coverage. Broker layer today, underwriter layer pending. USDC settlement on Base L2. Real rails.",
   keywords: ["mcp", "model-context-protocol", "x402", "agentic", "ai-agent", "ai-agents", "llm", "hive", "hive-civilization", "insurance", "parametric-insurance", "agent-sla", "uptime-coverage", "oracle-failure", "usdc", "base", "base-l2", "agent-economy", "a2a"],
-  externalUrl: "https://hive-mcp-gateway.onrender.com/insurance",
+  externalUrl: "https://hive-mcp-insurance.onrender.com",
   gatewayMount: "/insurance",
   version: "1.0.1",
   pricing: [
