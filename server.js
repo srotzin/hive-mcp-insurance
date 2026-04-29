@@ -174,7 +174,7 @@ app.get('/seo.json', (req, res) => res.json(seoJson(SERVICE_CFG)));
 // ─── Schema discoverability ────────────────────────────────────────────────
 const AGENT_CARD = {
   name: SERVICE,
-  description: `MCP server for HiveInsurance — parametric insurance for autonomous agents. Uptime SLA, treasury slippage, and oracle-failure coverage. Broker layer operational; underwriter layer in development. USDC settlement on Base L2. Scaffold shim — backend pending Q3 2026.. New agents: first call free. Loyalty: every 6th paid call is free. Pay in USDC on Base L2.`,
+  description: 'MCP server for HiveInsurance — parametric insurance for autonomous agents. Uptime SLA, treasury slippage, and oracle-failure coverage. USDC settlement on Base L2.. New agents: first call free. Loyalty: every 6th paid call is free. Pay in USDC on Base L2.',
   url: `https://${SERVICE}.onrender.com`,
   provider: {
     organization: 'Hive Civilization',
@@ -199,7 +199,12 @@ const AGENT_CARD = {
   },
   defaultInputModes: ['application/json'],
   defaultOutputModes: ['application/json'],
-  skills: TOOLS.map(t => ({ name: t.name, description: t.description })),
+  skills: [
+    { name: 'quote_policy', description: 'Quote a parametric insurance policy. Returns a premium estimate for the given risk type, coverage amount (USD), and term length. Backend pending (Q3 2026).' },
+    { name: 'bind_policy', description: 'Bind a previously quoted policy. Settlement via x402 / USDC on Base, Ethereum, or Solana. Returns policy_id on success. Backend pending (Q3 2026).' },
+    { name: 'claim_status', description: 'Check the status of a parametric insurance claim associated with a policy. Returns current state: pending / triggered / paid / disputed. Backend pending (Q3 2026).' },
+    { name: 'parametric_trigger_check', description: 'Check whether a parametric oracle event hash satisfies the trigger condition for automatic claim payout. Returns boolean. Backend pending (Q3 2026).' },
+  ],
   extensions: {
     hive_pricing: {
       currency: 'USDC',
@@ -217,7 +222,7 @@ const AP2 = {
   agent: {
     name: SERVICE,
     did: `did:web:${SERVICE}.onrender.com`,
-    description: `MCP server for HiveInsurance — parametric insurance for autonomous agents. Uptime SLA, treasury slippage, and oracle-failure coverage. Broker layer operational; underwriter layer in development. USDC settlement on Base L2. Scaffold shim — backend pending Q3 2026.. New agents: first call free. Loyalty: every 6th paid call is free. Pay in USDC on Base L2.`,
+    description: 'MCP server for HiveInsurance — parametric insurance for autonomous agents. Uptime SLA, treasury slippage, and oracle-failure coverage. USDC settlement on Base L2.. New agents: first call free. Loyalty: every 6th paid call is free. Pay in USDC on Base L2.',
   },
   endpoints: {
     mcp: `https://${SERVICE}.onrender.com/mcp`,
@@ -237,7 +242,7 @@ const AP2 = {
 };
 
 app.get('/.well-known/agent-card.json', (req, res) => res.json(AGENT_CARD));
-app.get('/.well-known/ap2.json', (req, res) => res.json(AP2));
+app.get('/.well-known/ap2.json',         (req, res) => res.json(AP2));
 
 
 app.listen(PORT, () => {
